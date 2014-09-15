@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Norgeskart with Leaflet - Example</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+</head>
+<body>
+	<div id="map" style="width: 800px; height: 600px"></div>
+
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script>
+
+		var map = L.map('map').setView([62.505, 14.09], 5);
+
+		L.tileLayer.wms('http://openwms.statkart.no/skwms1/wms.topo2?', {
+			layers: 'topo2_WMS',
+			format: 'image/png',
+			transparent: true,
+			attribution: 'Map data &copy; <a href="http://kartverket.no">Kartverket</a>'
+		}).addTo(map);
+
+	</script>
+</body>
+</html>
