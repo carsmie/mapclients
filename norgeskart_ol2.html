@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Norgeskart with OpenLayers 2 - Example</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script src="http://openlayers.org/api/OpenLayers.js"></script>
+	<script type="text/javascript">
+		function init() {
+
+			var srsName = "EPSG:32633";			
+			var options = {
+				projection: new OpenLayers.Projection(srsName),
+				units: "m",
+				numZoomLevels: 18,
+				maxResolution: 21664.0,
+				maxExtent: new OpenLayers.Bounds(-2500000.0,3500000.0,3045984.0,9045984.0)
+			};
+
+			var map = new OpenLayers.Map('map',options);
+			var baseLayer = new OpenLayers.Layer.WMS("topo2_WMS",
+					"http://openwms.statkart.no/skwms1/wms.topo2?",
+					{layers: "topo2_WMS", format: 'image/png'} 
+			);
+			map.addLayers([baseLayer]);
+			map.setCenter(new OpenLayers.LonLat(238168,6679753), 12);
+		}		
+	</script>
+</head>
+<body onload="init()">
+	<div id="map" class="smallmap"></div>
+</body>
+</html>
