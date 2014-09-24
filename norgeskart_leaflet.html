@@ -12,14 +12,47 @@
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	<script>
 
-		var map = L.map('map').setView([62.505, 14.09], 5);
-
-		L.tileLayer.wms('http://openwms.statkart.no/skwms1/wms.topo2?', {
+		//Layers
+		var topo2 = L.tileLayer.wms('http://openwms.statkart.no/skwms1/wms.topo2?', {
 			layers: 'topo2_WMS',
 			format: 'image/png',
 			transparent: true,
 			attribution: 'Map data &copy; <a href="http://kartverket.no">Kartverket</a>'
-		}).addTo(map);
+		});
+		
+		var kartdata2 = L.tileLayer.wms('http://openwms.statkart.no/skwms1/wms.kartdata2?', {
+			layers: 'kartdata2',
+			format: 'image/png',
+			transparent: true,
+			attribution: 'Map data &copy; <a href="http://kartverket.no">Kartverket</a>'
+		});
+		var toporaster2 = L.tileLayer.wms('http://openwms.statkart.no/skwms1/wms.toporaster2?', {
+			layers: 'toporaster2',
+			format: 'image/png',
+			transparent: true,
+			attribution: 'Map data &copy; <a href="http://kartverket.no">Kartverket</a>'
+		});
+		var sjo_hovedkart2 = L.tileLayer.wms('http://openwms.statkart.no/skwms1/wms.sjo_hovedkart2?', {
+			layers: 'sjo_hovedkart2',
+			format: 'image/png',
+			transparent: true,
+			attribution: 'Map data &copy; <a href="http://kartverket.no">Kartverket</a>'
+		});
+		
+		// The map
+		var map = L.map('map', {layers: [topo2]}).setView([62.505, 14.09], 5);
+		
+		var baselayers = {
+			"topo2":topo2,
+			"kartdata2":kartdata2,
+			"toporaster2":toporaster2,
+			"sjo_hovedkart2":sjo_hovedkart2
+		}
+		// The control for layers
+		L.control.layers(baselayers).addTo(map);
+				
+		//Add scale
+		L.control.scale({imperial:false}).addTo(map);
 
 	</script>
 </body>
